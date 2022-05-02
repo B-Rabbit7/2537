@@ -2,7 +2,6 @@ body {
     background-color: #8eecf5;
 }
 h1 {
-    text-align: center;
     font-family: 'Courier New', Courier, monospace;
     background-color:#90dbf4 ;
 }
@@ -10,7 +9,7 @@ h1 {
 main {
     padding-top: 10px;
     display: grid;
-    grid-template-columns: auto auto auto auto;
+    grid-template-columns: auto auto auto;
     justify-content: center;
     gap: 10px;
 }
@@ -44,7 +43,7 @@ nav a {
 
 }
 
-footer {
+footer, header {
     text-align: center;
 }
 
