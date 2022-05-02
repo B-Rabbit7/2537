@@ -1,7 +1,9 @@
 function generateAllPokemons(data){
+    console.log(data)
+    console.log(data.results[0].url)
     
     i = 0;
-    while (i < 9){
+    while (i < 12){
         var randomPoke = Math.ceil(Math.random()* 1126);
         var randomPokeName = data.results[randomPoke].name;
         getRandomPokemons(randomPokeName);
