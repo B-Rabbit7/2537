@@ -16,7 +16,7 @@ function displayRandomPokemons(data){
     console.log(data.name)
     console.log(data.sprites)
     console.log(data.sprites.front_default)
-    $('.PokeGallery').append(`<div class="image_container"><a href="/profile/${data.id}"><img src="${data.sprites.front_default}" alt="${data.name}"></a></div>`)
+$('.PokeGallery').append(`<div class="image_container"><a href="/profile/${data.id}"><img src="${data.sprites.front_default}" alt="${data.name}"></a></div>`)
 
     
 }

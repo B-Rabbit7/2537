@@ -5,6 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="search.js"></script>
     <title>Document</title>
 </head>
 <body>
@@ -23,17 +25,22 @@
     </nav>
     <div class="search">
         <h3>Search Filters</h3><br>
-        <input type="text" value="Search Pokemon" id="searchPoke">
+        <input type="text" id="searchPoke" value="Pokemon Name">
         <select name="Filters" id="searchFilter">
             <option value="name">name</option>
             <option value="height">height</option>
             <option value="base_experience">baseEXP</option>
-
         </select>
-
-
+        <select name="poke_type" id="poke_type">
+            <option value="grass">grass</option>
+            <option value="water">water</option>
+            <option value="electric">electric</option>
+            <option value="dark">dark</option>
+          </select>
 
     </div>
-    
+    <main>
+
+    </main>
 </body>
 </html>
