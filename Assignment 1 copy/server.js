@@ -1,6 +1,8 @@
 const express = require('express')
 const app = express()
 app.set('view engine', 'ejs');
+//mongoose
+const mongoose = require('mongoose');
 
 app.listen(5000, function (err) {
     if (err)
@@ -10,6 +12,38 @@ app.listen(5000, function (err) {
 // app.get('/', function (req, res) {
 //     res.send('<h1> GET request to homepage </h1>')    
 // })
+
+mongoose.connect("mongodb://localhost:27017/timelineevents",
+ {useNewUrlParser: true, useUnifiedTopology: true});
+const timelineSchema = new mongoose.Schema({
+    text: String,
+    hits: Number,
+    time: String
+});
+
+const timelineModel = mongoose.model("timelineevents", timelineSchema);
+
+app.get('/timeline', function(req, res) {
+    timelineModel.find({}, function(err, timelineEvents){
+        if (err){
+          console.log("Error " + err);
+        }else{
+          console.log("Data "+ JSON.stringify(timelineEvents));
+        }
+        res.send(JSON.stringify(timelineEvents));
+    });
+  })
+
+  app.get('/timeline', function(req, res) {
+    cityModel.find({}, function(err, timelineEvents){
+        if (err){
+          console.log("Error " + err);
+        }else{
+          console.log("Data "+ JSON.stringify(timelineEvents));
+        }
+        res.send(JSON.stringify(timelineEvents));
+    });
+  })
 
 
 const https = require('https');
