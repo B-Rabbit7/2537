@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,6 +10,7 @@
     <script src="search.js"></script>
     <title>Document</title>
 </head>
+
 <body>
     <header>
         <h1>Luximus Pokemon</h1>
@@ -18,37 +20,47 @@
             <a href="./search.html">
                 Search
             </a>
-        </div> 
+        </div>
         <a href="">
             Link 4
         </a>
     </nav>
     <div class="search">
         <h3>Search Filters</h3><br>
-        
+
         Filter by Type:
         <select name="poke_type" id="poke_type">
             <option value="grass">grass</option>
             <option value="water">water</option>
             <option value="electric">electric</option>
             <option value="dark">dark</option>
-          </select>
-          <div class="search2">
-              Search by Pokemon Name:
-              <input type="text" id="name_input" name="searchName">
+            <option value="steel">steel</option>
+            <option value="psychic">psychic</option>
+            <option value="fighting">fighting</option>
+            <option value="poison">poison</option>
+            <option value="ground">ground</option>
+            <option value="flying">flying</option>
+            <option value="fairy">fairy</option>
+        </select>
+        <div class="search2">
+            Search by Pokemon Name:
+            <input type="text" id="name_input" placeholder="Enter Name" name="searchName">
             <button id="name">Submit
             </button>
             Search by Pokemon ability:
-            <input type="text" id="ability_input" name="searchAbility">
+            <input type="text" id="ability_input" placeholder="Enter Ability" name="searchAbility">
             <button id="ability">Submit
             </button>
+            History
+            <div class="history"></div>
+            <button id="clear">Clear</button>
+        </div>
 
-          </div>
-        
 
     </div>
     <main>
 
     </main>
 </body>
+
 </html>
