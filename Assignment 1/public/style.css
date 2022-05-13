@@ -47,6 +47,11 @@ footer, header {
     text-align: center;
 }
 
+.image_container{
+    background-color:#b9fbc0;
+    border-radius: 5%;
+}
+
 .search {
     display: grid;
     grid-template-columns: auto;

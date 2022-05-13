@@ -3,26 +3,104 @@ showPoke = '';
 abilityPoke = " " ;
 ability = '';
 namePoke = '';
-
+poke_type = 'normal'
+to_add = ''
+filter_request = ''
 // Type
-function processByType(data){
-    showPoke = ''
-    for (i = 0 ; i < data.types.length; i++)
-        if(data.types[i].type.name == typePoke)
-            showPoke += `<div class = "PokeType"><a href="/profile/${data.id}"><img src="${data.sprites.front_default}" alt="${data.name}"></a></div>`
-    
-    $("main").append(showPoke)
+
+
+// function processByType(data){
+//     showPoke = '';
+
+//     for (i = 0 ; i < data.types.length; i++)
+//         if(data.types[i].type.name == typePoke)
+//             showPoke += `<div class = "PokeType"><a href="/profile/${data.id}"><img src="${data.sprites.front_default}" alt="${data.name}"></a></div>`
+//     console.log(showPoke)
+//     show = showPoke
+//     $("main").html(show)
+// }
+
+// function displayPokeType(by_type){
+//     typePoke = by_type;
+//     for(i=1; i<1126; i++) {
+//         $.ajax({
+//             type: "GET",
+//             url : `https://pokeapi.co/api/v2/pokemon/${i}`,
+//             success: processByType
+//         })
+//     }
+
+// }
+// Get pokemon with type selected
+
+function get_random_pokemon(data) {
+    console.log(data)
+    to_add += `  <div class="img-container"> ${data.name} <br>
+    <a href="/profile/${data.id}">
+    <img src="${data.sprites.other["official-artwork"].front_default}"> 
+    </a>
+    <br>
+    ${data.types[0].type.name} type
+    </div>`
+
 }
 
-function displayPokeType(by_type){
-    typePoke = by_type;
-    for(i=1; i<1126; i++) {
-        $.ajax({
-            type: "GET",
-            url : `https://pokeapi.co/api/v2/pokemon/${i}`,
-            success: processByType
+// Display pokemon
+async function load_type(data) {
+    to_add = ''
+    console.log("function called")
+    for(i = 1; i < data.pokemon.length; i ++){
+        if (i % 3 == 1) { 
+            to_add += `<div class="clearfix">`
+        }
+
+        await $.ajax({
+            "url": `https://pokeapi.co/api/v2/pokemon/${data.pokemon[i].pokemon.name}/`,
+            "type": "GET",
+            "success": get_random_pokemon
         })
+
+
+        if (i % 3 == 0) {
+            to_add += `</div>`
+        }
     }
+    $("main").html(to_add)
+    filter_button = `<button onclick="history_return(to_add)">${filter_request}</button>`
+    append_history();
+}
+
+
+function get_Poke_by_type(poke_type){
+    console.log(poke_type)
+    $.ajax({
+        "url": `https://pokeapi.co/api/v2/type/${poke_type}`,
+        "type": "GET",
+        "success": load_type
+    })
+
+}
+
+// Populates Type Search Options
+function loadtypes(data){
+    types = ''
+
+    for(i = 0; i < data.results.length; i ++){
+        types += `<option value="${data.results[i].name}">${data.results[i].name}</option>`
+        types += '<br>'
+    }
+    console.log(types)
+    $('#poke_type').html(types)
+}
+
+// Get's pokemon that are the same type
+function get_Poke_types(){
+    console.log('working')
+    $.ajax({
+        "url": `https://pokeapi.co/api/v2/type`,
+        "type": "GET",
+        "success": loadtypes
+    })
 
 }
 
@@ -37,7 +115,7 @@ function showPoke_name(data){
     </a>
     <br>Click on the Pokemon to reveal it's stats!</div>`
     $("main").html(reveal_pokemon);
-    poke_button = `<button id ="${data.name}" onclick="history_return(reveal_pokemon)">${data.name}</button>`
+    filter_button = `<button id ="${data.name}" onclick="history_return(reveal_pokemon)">${data.name}</button>`
     append_history();
 }
 
@@ -105,12 +183,12 @@ async function showPoke_ability(data) {
         })
 
 
-        if (i % 3 == 0) { // only when i= 3, 6, 9
+        if (i % 3 == 0) {
             ability += `</div>`
         }
     }
     $("main").html(ability)
-    poke_button = `<button id= "${data.pokemon[0].pokemon.name}" onclick="history_return(ability)">${abilityPoke}</button>`
+    filter_button = `<button id= "${data.pokemon[0].pokemon.name}" onclick="history_return(ability)">${abilityPoke}</button>`
     append_history();
 }
 
@@ -118,7 +196,7 @@ async function showPoke_ability(data) {
 
 function append_history(){
     button_text = "<button class='remove_button'>Hide this</button>"
-    styled_output = "<span id='search'>" + poke_button + button_text +"</span>";
+    styled_output = "<span id='search'>" + filter_button + button_text +"</span>";
     $('.history').append(styled_output)
 }
 
@@ -140,10 +218,13 @@ function clear(){
 //set up function
 
 function setup(){
-    displayPokeType($("#poke_type option:selected").val())
-    $("#poke_type").change(() => {
-        poke_type  = $("#poke_type option:selected").val();
-        displayPokeType($("#poke_type option:selected").val())
+    // get the pokemon types
+    get_Poke_types();
+    $('#poke_type').change(() => {
+        // get poke selected client type
+        filter_button =$('#poke_type option:selected').val();
+        get_Poke_by_type(filter_button);
+        filter_request = filter_button
     })
     $("#name").click(searchPokeName)
     $("#ability").click(searchPokeAbility)

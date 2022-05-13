@@ -1,26 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        body {
+            background-color: #fde4cf;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            background-color: #f1c0e8;
+            display: flex;
+            justify-content: center;
+        }
+        div.profile_image_container{
+            background-color: #ffcfd2;
+            display: flex;
+            justify-content: center;
+
+        }
+        div.image{
+            border-radius: 30%;
+            background-color: #cfbaf0;
+        }
+        div.pokemon_stat_details{
+            display: grid;
+            grid-template-columns: auto auto;
+            justify-content: center;
+            background-color: #8eecf5;
+            row-gap: 5px;
+            column-gap: 10px;
+        }
+
+    </style>
 </head>
+
 <body>
-    <h1>Hi this pokemon has id : <%= id%> </h1>
+    <header>
+        <h1><%= name %> Profile Page</h1>
+    </header>
     <br>
-
-
-        <b>This Pokemon  id:</b> <%= id %>
-        <br>
-        <b>This Pokemon  Name:</b> <%= name %>
-        <br>
-        This Pokemon Weight: <%= weight %><br>
-        The HP is: <%= hp %>
-        <progress id="file" value="<%= hp %>" max="255"> <%= hp %>% </progress><br>
-        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/<%= id %>.png" alt="">
-        <br>
+    <div class="profile_image_container">
+        <div class="image"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/<%= id %>.png"
+            alt=""></div>
         
-    
+    </div>
+    <div class="pokemon_stat_details">
+        <div class="id"> <b>This Pokemon id:</b> <%= id %></div>
+       <div class="name"><b>This Pokemon Name:</b> <%= name %></div>
+       <div class="weight"><b>Pokemon Weight:</b>  <%= weight %></div>
+       <div class="hp"><b>Pokemon HP is:</b> <%= hp %> <progress id="file" value="<%= hp %>" max="255"> <%= hp %>% </progress></div>
+        <div class="type"><b>Pokemon Type:</b> <%= type%></div>
+        <div class="abilities"><b>Pokemon Abilities:</b>
+            <ol>
+            <li>
+                <%= ability1 %>
+            </li>
+            <li>
+                <%= ability2 %>
+            </li>
+        </ol></div>
+        <div class="base-exp"><b>Pokemon Base Experience:</b> <%= baseEXP%> <progress id="baseEXP" value="<%= baseEXP %>" max="600"> <%= baseEXP %>%
+        </progress></div>
+        <div class="height"><b>Pokemon Height:</b> <%= height%> decimeters</div>
+        <div class="order"><b>Pokemon Order:</b> <%= order%> </div>
+    </div>
+
+
+
+
+
+
+
 </body>
+
 </html>

@@ -36,7 +36,12 @@ app.get('/profile/:id', function (req, res) {
                 "hp": hpPoke[0],
                 "imagePoke": data.sprites.other["official-artwork"]["front_default"],
                 "type": data.types[0].type.name,
-                "weight": data.weight
+                "weight": data.weight,
+                "ability1": data.abilities[0].ability.name,
+                "ability2": data.abilities[1].ability.name,
+                "baseEXP":  data.base_experience,
+                "height": data.height,
+                "order": data.order
             });
         })
     });
